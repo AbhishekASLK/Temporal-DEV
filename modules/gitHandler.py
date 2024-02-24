@@ -4,8 +4,10 @@ import git
 from tkinter import messagebox, simpledialog
 
 class GitHubHandler:
-    def __init__(self):
+    def __init__(self,current_code):
+        self.current_code = current_code
         self.cwd = os.getcwd()
+        self.path = self.cwd+"/sessions/"
 
     def stage_changes(self):
         try:
@@ -13,18 +15,24 @@ class GitHubHandler:
         except git.GitCommandError as e:
             messagebox.showerror('Error', f'Error staging changes: {e.stderr}')
 
-    def commit_changes(self, commit_msg):
+    def commit_changes(self):
         try:
-            self.repo.git.commit('-m', commit_msg)
+            self.repo.git.commit('-m', self.commit_msg)
             messagebox.showinfo('Info', 'Changes committed successfully.')
         except git.GitCommandError as e:
             messagebox.showerror(
                 'Error', f'Error committing changes: {e.stderr}')
 
-    def push_changes(self):
+    def push_changes(self,folder):
         try:
             self.repo.git.push('origin', 'main')
             messagebox.showinfo('Info', 'Changes pushed successfully.')
+            # Append to the summary file
+            with open(folder+'/summary.txt', 'a') as summary_file:
+                summary_file.write(self.current_code)
+                print(self.current_code)
+                summary_file.write(f'\nExplanation: {self.commit_msg}\n')
+                summary_file.write('==================\n\n')
         except git.GitCommandError as e:
             messagebox.showerror('Error', f'Error pushing changes: {e.stderr}')
 
@@ -84,14 +92,14 @@ class GitHubHandler:
                 main_branch = self.repo.head.reference
 
             # Commit message prompt
-            commit_msg = simpledialog.askstring(
+            self.commit_msg = simpledialog.askstring(
                 "Commit Message", f"Enter commit message for {folder}:")
-            if not commit_msg:
+            if not self.commit_msg:
                 messagebox.showerror(
                     'Error', 'Commit message cannot be empty.')
                 return
 
-            self.commit_changes(commit_msg)
-            self.push_changes()
+            self.commit_changes()
+            self.push_changes(folder)
 
         os.chdir(self.cwd)

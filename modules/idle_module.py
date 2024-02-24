@@ -95,7 +95,7 @@ class IDLEFrame(Frame):
     # ******************* Github Functionality **********************
 
     def push_to_github(self):
-        github_handler = GitHubHandler()
+        github_handler = GitHubHandler(self.app.current_code)
         github_handler.push_to_github()
 
     def new(self):
