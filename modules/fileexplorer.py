@@ -184,10 +184,10 @@ class FileExplorer(tk.Frame):
 
                 # Insert content with appropriate icon
                 if content_type == "folder":
-                    content_id = self.tree.insert(session_folder_id, "end", text=" "+content, tags=(
+                    content_id = self.tree.insert(session_folder_id, "end", text=content, tags=(
                         "folder",), image=self.folder_icon)
                 else:
-                    content_id = self.tree.insert(session_folder_id, "end", text=" "+content, tags=(
+                    content_id = self.tree.insert(session_folder_id, "end", text=content, tags=(
                         "file",), image=self.file_icon)
     def on_click(self, event):
         # Get the selected item in the tree
