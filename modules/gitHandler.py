@@ -4,8 +4,10 @@ import git
 from tkinter import messagebox, simpledialog
 
 class GitHubHandler:
-    def __init__(self,current_code):
+    def __init__(self,current_code,output_code,output_code_error):
         self.current_code = current_code
+        self.output_code = output_code
+        self.output_code_error = output_code_error
         self.cwd = os.getcwd()
         self.path = self.cwd+"/sessions/"
 
@@ -29,8 +31,9 @@ class GitHubHandler:
             messagebox.showinfo('Info', 'Changes pushed successfully.')
             # Append to the summary file
             with open(folder+'/summary.txt', 'a') as summary_file:
-                summary_file.write(self.current_code)
-                print(self.current_code)
+                summary_file.write(f'Code: \n{self.current_code}\n')
+                summary_file.write(f'\nOutput:\n {self.output_code}')
+                summary_file.write(self.output_code_error)
                 summary_file.write(f'\nExplanation: {self.commit_msg}\n')
                 summary_file.write('==================\n\n')
         except git.GitCommandError as e:

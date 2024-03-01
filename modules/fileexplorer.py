@@ -41,9 +41,9 @@ class FileExplorer(tk.Frame):
 
         # Define icons for folders and files
         self.folder_icon = tk.PhotoImage(
-            file="assets/images/folder_icon.png").subsample(10, 10)
+            file="/home/abhishekaslk/Temporal-DEV/assets/images/folder_icon.png").subsample(10, 10)
         self.file_icon = tk.PhotoImage(
-            file="assets/images/file_icon.png").subsample(10, 10)
+            file="/home/abhishekaslk/Temporal-DEV/assets/images/file_icon.png").subsample(10, 10)
 
         # Bind double click event to handle folder opening
         self.tree.bind('<Button-1>', self.on_click)

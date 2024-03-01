@@ -55,6 +55,10 @@ class ChatGPTFrame(ttk.Frame):
         # Add some padding and margin to the input field
         self.input_field = tk.Entry(input_frame, font=(
             'arial', 18), foreground='white', background='#3D3D3D')
+        # Adding placeholder
+        self.input_field.insert(0,'Ask what you want...')
+        self.input_field.bind('<FocusIn>',self.on_entry_click)
+        self.input_field.bind('<FocusOut>',self.on_focus_out)
         self.input_field.pack(side=tk.LEFT, fill=tk.X,
                               expand=True, padx=20, pady=100, ipady=20)
         self.input_field.bind("<Return>", self.send_message)
@@ -75,6 +79,19 @@ class ChatGPTFrame(ttk.Frame):
             'arial', 15), pady=300, background="gray", foreground='white')
         self.style.configure("Chat.TFrame", font=(
             'arial', 15), padding=10, background="#5DBCD2")
+
+
+    # functions for Adding placeholder
+    def on_entry_click(self,event):
+        if self.input_field.get() == 'Ask what you want...':
+            self.input_field.delete(0, "end")
+            self.input_field.insert(0, '')
+            self.input_field.config(fg = 'white')
+
+    def on_focus_out(self,event):
+        if self.input_field.get() == '':
+            self.input_field.insert(0, 'Ask what you want...')
+            self.input_field.config(fg = 'white')
 
     def send_message(self, event=None):
         # Retrieve the text from the input field after the user has entered it

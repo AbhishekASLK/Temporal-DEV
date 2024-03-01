@@ -32,6 +32,7 @@ class IDLEFrame(Frame):
     def __init__(self, master=None, **kwargs):
         super().__init__(master, **kwargs)
         self.app = master
+        self.output = ''
         self.path = ''
         self.font_size = 18
         self.check = StringVar(value='light')
@@ -89,13 +90,15 @@ class IDLEFrame(Frame):
         scrollbar1.pack(side=RIGHT, fill=Y)
         self.outputarea = Text(self.outputFrame, font=(
             'arial', self.font_size, 'bold'), yscrollcommand=scrollbar1.set)
+        self.output_code = self.outputarea.get("1.0", "end-1c")
+        # print(self.output_code,"---------")
         self.outputarea.pack(fill=BOTH, expand=True)
         scrollbar1.config(command=self.textarea.yview)
 
     # ******************* Github Functionality **********************
 
     def push_to_github(self):
-        github_handler = GitHubHandler(self.app.current_code)
+        github_handler = GitHubHandler(self.app.current_code,self.output.decode(),self.error.decode())
         github_handler.push_to_github()
 
     def new(self):
@@ -180,16 +183,16 @@ class IDLEFrame(Frame):
                 stderr=subprocess.PIPE
             )
 
-            output, error = run_file.communicate()
-            print(output, error)
+            self.output, self.error = run_file.communicate()
+            print(self.output, self.error)
 
             # Change back to the parent directory after the code execution
             os.chdir(os.path.abspath(os.path.join(script_directory, os.pardir)))
 
             self.outputarea.delete(1.0, END)
             # Assuming output is bytes
-            self.outputarea.insert(1.0, output.decode())
-            self.outputarea.insert(1.0, error.decode())  # Ass
+            self.outputarea.insert(1.0, self.output.decode())
+            self.outputarea.insert(1.0, self.error.decode())  # Ass
 
     def light_theme(self):
         self.button_frame.config(bg='white')

@@ -165,7 +165,7 @@ class TechUpdatesFrame(tk.CTkFrame):
 
     def load_data(self):
         # Fetch the data using the requests module in json format
-        self.data = requests.get('https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=b85c9838de5144d483d7cfd3df336d7d').json()
+        self.data = requests.get('https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&apiKey=92b0d30aa4c941d18bec50e86abdd320').json()
 
         # Remove the loading screen and load the 1st NEWS Item
         self.clear()

@@ -12,16 +12,14 @@ class AudioAuraFrame(customtkinter.CTkFrame):
         super().__init__(master, **kwargs)
         pygame.mixer.init()
         self.n = 0
-        self.list_of_songs = ['modules/songs/Husn-Slowed-Reverb.mp3','modules/songs/Core2Web-Theme-Song.mp3','modules/songs/Ve-Haaniyaan.mp3',]
-        self.list_of_covers = ['modules/images/husn_cover.jpg','modules/images/core2web_cover.png','modules/images/haaniya_cover.jpg',]
+        self.list_of_songs = ['/home/abhishekaslk/Temporal-DEV/modules/songs/Husn-Slowed-Reverb.mp3','/home/abhishekaslk/Temporal-DEV/modules/songs/Core2Web-Theme-Song.mp3','/home/abhishekaslk/Temporal-DEV/modules/songs/Ve-Haaniyaan.mp3',]
+        self.list_of_covers = ['/home/abhishekaslk/Temporal-DEV/modules/images/husn_cover.jpg','/home/abhishekaslk/Temporal-DEV/modules/images/core2web_cover.png','/home/abhishekaslk/Temporal-DEV/modules/images/haaniya_cover.jpg',]
 
         # Tkinter widgets
         self.setup_widgets()
 
     def setup_widgets(self):
-
-        
-
+    
         self.paused = False 
 
         # Album cover image

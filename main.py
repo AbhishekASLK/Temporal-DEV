@@ -102,11 +102,11 @@ class App(customtkinter.CTk):
             # Load icons
             # Load icons
             create_file_icon = tk.PhotoImage(
-                file="./assets/images/file_icon.png").subsample(7, 7)
+                file="/home/abhishekaslk/Temporal-DEV/assets/images/file_icon.png").subsample(7, 7)
             create_folder_icon = tk.PhotoImage(
-                file="./assets/images/folder_icon.png").subsample(7, 7)
+                file="/home/abhishekaslk/Temporal-DEV/assets/images/folder_icon.png").subsample(7, 7)
             create_push_icon = tk.PhotoImage(
-                file="./assets/images/up_arrow.png").subsample(7, 7)
+                file="/home/abhishekaslk/Temporal-DEV/assets/images/up_arrow.png").subsample(7, 7)
 
             # Create a frame for icons
             icon_frame = tk.Frame(self.file_explorer_frame,
