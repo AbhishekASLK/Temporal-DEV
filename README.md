@@ -9,7 +9,7 @@
 ![Visulize](./preview/5.png)
 
 ### Contributors 🤝🏻
-- Abhishek Bhosel
+- Abhishek Bhosle
 - Priyank Naik
 - Akshay Suke
 - Dnyaneshwari Varal
